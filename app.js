@@ -12,16 +12,16 @@ const AdminUserRouter = require('./routes/AdminUser')
 
 const PORT = process.env.PORT || 8080;
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'kundal.netlify.app/');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-
-
-app.use(cors({
+    res.setHeader('Access-Control-Allow-Origin', 'https://kundal.netlify.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true'); // If using credentials
+    next();
+  });
+  
+  app.use(cors({
     credentials: true,
-    origin: 'kundal.netlify.app/'
+    origin: 'https://kundal.netlify.app'
   }));
 
 app.use(cookieParser())
