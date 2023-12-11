@@ -144,7 +144,7 @@ router.post('/orderconfirm', async (req, res) => {
       name: "Kundal",
       address: "kundal.net.com@gmail.com"
     },
-    to: [userDetails.email, "worldm957@gmail.com"],
+    to: [userDetails.email, "mohammad@aalzayed.com", "saloom99@windowslive.com"],
     subject: "Order Confirmation",
     html: `
       <html>
