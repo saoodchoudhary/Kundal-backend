@@ -22,6 +22,20 @@ router.post('/orderconfirm', async (req, res) => {
     },
   });
 
+  
+  
+  const adminTransport = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+      user: "kundal.net.com@gmail.com",
+      pass: "vtvvwiuqjmltqqgo"
+    },
+  });
+
 
 
   // const mailOptions = await transporter.sendMail({
@@ -139,12 +153,13 @@ router.post('/orderconfirm', async (req, res) => {
       </tr>
     `;
   }
+
   const mailOptions = await transporter.sendMail({
     from: {
       name: "Kundal",
       address: "kundal.net.com@gmail.com"
     },
-    to: [userDetails.email, "mohammad@aalzayed.com", "saloom99@windowslive.com"],
+    to: [userDetails.email,],
     subject: "Order Confirmation",
     html: `
       <html>
@@ -202,7 +217,72 @@ router.post('/orderconfirm', async (req, res) => {
       </html>
     `
   }).then((r) => {
-   console.log(r)
+  });
+
+  // for admin
+  const adminMailOptions = await adminTransport.sendMail({
+    from: {
+      name: "Kundal",
+      address: "kundal.net.com@gmail.com"
+    },
+    to: [ "mohammad@aalzayed.com", "saloom99@windowslive.com"],
+    subject: "Order Confirmation",
+    html: `
+      <html>
+        <head>
+          <style>
+            /* Add your styles for the email here */
+            /* Example style */
+            body {
+              font-family: Arial, sans-serif;
+              line-height: 1.6;
+            }
+            .order-details {
+              border-collapse: collapse;
+              width: 100%;
+            }
+            .order-details th, .order-details td {
+              border: 1px solid #ddd;
+              padding: 8px;
+              text-align: left;
+            }
+            .order-details th {
+              background-color: #f2f2f2;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Hello, ${userDetails.firstName}!</h1>
+          <p>Your order has been confirmed. Below are the details:</p>
+          
+          <h2>Delivery Details:</h2>
+          <p>
+            Name: ${userDetails.firstName} ${userDetails.lastName}<br>
+            Address: ${userDetails.houseNumber}, ${userDetails.street}, ${userDetails.block}, ${userDetails.area}, ${userDetails.jada}<br>
+            Phone: ${userDetails.phone}<br>
+            Email: ${userDetails.email}
+          </p>
+          
+          <h2>Ordered Items:</h2>
+          <table class="order-details">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+            ${itemsHTML}
+              
+            </tbody>
+          </table>
+          
+          <p>Thank you for shopping with us!</p>
+        </body>
+      </html>
+    `
+  }).then((r) => {
   });
 
 
