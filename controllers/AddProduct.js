@@ -30,6 +30,27 @@ const handleAddProduct = (req, res) => {
 
 }
 
+const updateProduct = async(req, res)=>{
+  const {id, title,description,fragrance ,ingredients,stock} = req.body;
+  await AddProductModel.findByIdAndUpdate({_id:id},{
+   fragrance:fragrance,
+   ingredients, ingredients,
+   description, description,
+   title: title,
+   stock: stock
+  }).then(()=>{
+   res.json({
+   sucess: "success"
+  })
+  }).catch((error)=>{
+   console.log(error)
+   res.json({
+      success:"fails"
+   })
+  })
+
+  
+}
 const handleGetAllProduct = (req, res) => {
    AddProductModel.find()
       .then((result) => {
@@ -108,4 +129,4 @@ const handleGetDeleteProduct = (req, res) => {
       })
 }
 
-module.exports = { handleAddProduct, handleGetAllProduct, handleGetCategoryProduct, handleGetDeleteProduct,handleOneProduct }
+module.exports = { handleAddProduct, handleGetAllProduct, handleGetCategoryProduct, handleGetDeleteProduct,handleOneProduct, updateProduct }

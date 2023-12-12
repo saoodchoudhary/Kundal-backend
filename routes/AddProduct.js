@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose')
-const { handleAddProduct, handleGetAllProduct, handleGetCategoryProduct, handleGetDeleteProduct, handleOneProduct } = require("../controllers/AddProduct");
+const { handleAddProduct, handleGetAllProduct, handleGetCategoryProduct, handleGetDeleteProduct, handleOneProduct, updateProduct } = require("../controllers/AddProduct");
 
 const router = express.Router();
 
@@ -24,6 +24,7 @@ const upload = multer({
 
 router.post("/uploadImage", upload.single('file') , handleAddProduct)
 
+router.post("/update/product", updateProduct)
 router.get("/product", handleGetAllProduct)
 
 router.get("/product/:id", handleOneProduct)
