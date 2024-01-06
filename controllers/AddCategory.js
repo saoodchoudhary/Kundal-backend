@@ -39,6 +39,36 @@ const handleAddCategory = (req,res)=>{
     })
    
  }  
+
+ const handleHideShowCategory = (req,res)=>{
+    
+    const {_id, status} = req.body
+    let value = ""
+    if (status === "show") {
+       value = "hide"
+ 
+    } else {
+       value = "show"
+    }
+
+    AddCategoryModel.findByIdAndUpdate({_id:_id},{status:value})
+    .then(()=>{
+       
+          res.json({
+            success: true,
+            message: 'Category update successfully'
+         });
+    })
+    .catch(()=>{
+        res.json({ 
+            success: false,
+             error: 'Failed to update category' 
+       });
+    })
+   
+ }  
+
+
  const handleDeleteCategory = (req,res)=>{
     
     const {id} = req.params
@@ -62,6 +92,19 @@ const handleAddCategory = (req,res)=>{
  } 
 
  const handleGetAllCategory = (req,res)=>{
+    AddCategoryModel.find({status:"show"})
+    .then((result)=>{       
+          res.json(result);
+    })
+    .catch(()=>{
+        res.json({ 
+            success: false,
+             error: 'Failed to fetch category' 
+       });
+    })
+   
+ } 
+ const handleGetAdminCategory = (req,res)=>{
     AddCategoryModel.find()
     .then((result)=>{       
           res.json(result);
@@ -74,4 +117,4 @@ const handleAddCategory = (req,res)=>{
     })
    
  } 
- module.exports = { handleAddCategory , handleDeleteCategory, handleUpdateCategory,handleGetAllCategory}
+ module.exports = { handleAddCategory , handleDeleteCategory, handleUpdateCategory,handleGetAllCategory,handleGetAdminCategory,handleHideShowCategory}
