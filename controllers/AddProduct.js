@@ -5,7 +5,7 @@ const AddProductModel = require("../model/AddProductModel");
 
 
 const handleAddProduct = (req, res) => {
-   const { category, title, description, price,fragrance, discountPrice, stock, unit,weight,brand,tag,oldPrice,ingredients } = req.body;
+   const { category, title, description, price, fragrance, discountPrice, stock, unit, weight, brand, tag, oldPrice, ingredients } = req.body;
 
    AddProductModel.create({
       title: title,
@@ -30,28 +30,68 @@ const handleAddProduct = (req, res) => {
 
 }
 
-const updateProduct = async(req, res)=>{
-  const {id, title,description,fragrance ,ingredients,stock} = req.body;
-  await AddProductModel.findByIdAndUpdate({_id:id},{
-   fragrance:fragrance,
-   ingredients, ingredients,
-   description, description,
-   title: title,
-   stock: stock
-  }).then(()=>{
-   res.json({
-   sucess: "success"
-  })
-  }).catch((error)=>{
-   console.log(error)
-   res.json({
-      success:"fails"
+const updateProduct = async (req, res) => {
+   const { id, title, description, fragrance, ingredients, stock } = req.body;
+   await AddProductModel.findByIdAndUpdate({ _id: id }, {
+      fragrance: fragrance,
+      ingredients, ingredients,
+      description, description,
+      title: title,
+      stock: stock
+   }).then(() => {
+      res.json({
+         sucess: "success"
+      })
+   }).catch((error) => {
+      console.log(error)
+      res.json({
+         success: "fails"
+      })
    })
-  })
-
-  
 }
+
+const hideShowProduct = async (req, res) => {
+   console.log("hello")
+   console.log(req.body)
+   const { _id, status } = req.body;
+   let value = ""
+   if (status === "show") {
+      value = "hide"
+
+   } else {
+      value = "show"
+   }
+   console.log(_id)
+   await AddProductModel.findByIdAndUpdate({_id:_id},{
+      status: value
+   }).then(() => {
+      res.json({
+         sucess: "success"
+      })
+   }).catch((error) => {
+      console.log(error)
+      res.json({
+         success: "fails"
+      })
+   })
+}
+
 const handleGetAllProduct = (req, res) => {
+   AddProductModel.find({status:"show"})
+      .then((result) => {
+
+         res.json(result);
+      })
+      .catch(() => {
+         res.json({
+            success: false,
+            error: 'Failed to fetch all product'
+         });
+      })
+}
+
+
+const handleGetAllAdminProduct = (req, res) => {
    AddProductModel.find()
       .then((result) => {
 
@@ -66,7 +106,7 @@ const handleGetAllProduct = (req, res) => {
 }
 
 const handleGetCategoryProduct = (req, res) => {
-   AddProductModel.find({ category: req.params.id })
+   AddProductModel.find({status:"show", category: req.params.id })
       .then((result) => {
 
          res.json(result);
@@ -95,7 +135,7 @@ const handleGetDeleteProduct = (req, res) => {
    // const fileName = req.params.fileName; // Get the file name to be deleted
 
    AddProductModel.findByIdAndDelete({ _id: req.params.id })
-   
+
       .then((result) => {
 
          const fileName = result.image;
@@ -129,4 +169,13 @@ const handleGetDeleteProduct = (req, res) => {
       })
 }
 
-module.exports = { handleAddProduct, handleGetAllProduct, handleGetCategoryProduct, handleGetDeleteProduct,handleOneProduct, updateProduct }
+module.exports = {
+   handleAddProduct,
+   handleGetAllProduct,
+   handleGetCategoryProduct,
+   handleGetDeleteProduct,
+   handleOneProduct,
+   updateProduct,
+   hideShowProduct,
+   handleGetAllAdminProduct
+}

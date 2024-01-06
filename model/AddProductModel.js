@@ -11,6 +11,10 @@ const AddProductSchema = new mongoose.Schema({
     image: String,
     unit: String,
     tag: String,
+    status:{
+        type:String,
+        default:"show"
+    },
     weight: String,
     discountPrice: String,
     stock: String
