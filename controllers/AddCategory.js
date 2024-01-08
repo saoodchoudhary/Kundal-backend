@@ -1,11 +1,14 @@
 
 
 const AddCategoryModel = require('../model/AddCategory');
+const path = require('path');
+const fs = require('fs');
+
 
 const handleAddCategory = (req,res)=>{
     
     AddCategoryModel.create({
-       name:req.body.name,
+       name:req.body.name, image: req.file.filename,
     })
     .then(()=>{
        res.json({
@@ -74,13 +77,32 @@ const handleAddCategory = (req,res)=>{
     const {id} = req.params
 
     AddCategoryModel.findByIdAndDelete(id)
-    .then(()=>{
+    .then((result)=>{
        
           // Category successfully deleted
-          res.json({
-            success: true,
-            message: 'Category delete successfully'
-         });
+          const fileName = result.image;
+
+          console.log(fileName)
+          // Replace 'public/Images' with your actual image storage folder
+          const filePath = path.join('public/Images', fileName);
+ console.log(filePath)
+          // Check if the file exists
+          if (fs.existsSync(filePath)) {
+ 
+             // Delete the file
+             fs.unlinkSync(filePath);
+ 
+             res.json({
+                success: true,
+                message: 'File deleted successfully'
+             });
+ 
+          } else {
+             res.json({
+                error: 'File not found',
+                success: false
+             });
+          }
     })
     .catch(()=>{
         res.json({ 

@@ -6,6 +6,10 @@ const AddCategoryShema = new mongoose.Schema({
         required: true,
         unique: true
     },
+   image:{
+    type:String,
+    required:true
+   },
     status:{
         type:String,
         default:"show"
