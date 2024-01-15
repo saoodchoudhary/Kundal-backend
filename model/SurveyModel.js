@@ -11,84 +11,177 @@ const mongoose = require('mongoose')
 // I. How many times have you used Kundal products since you received them?
 // J.have you seen a difference after using our Kundal hair/skin products?
 const SurveySchema = new mongoose.Schema({
-    productName:{
+    name:{
         type:String
     },
-    a:{
+    age:{
         type: String,
         
     },
-    b:{
+    hairKind:{
         type: String,
         
     },
-    c:{
+    maxProduct:{
         type: String,
         
     },
-    d:{
+    productName1:{
         type: String,
         
     },
-    e:{
+    productName2:{
         type: String,
         
     },
-    f:{
+    productName3:{
         type: String,
         
     },
-    g:{
+    opinion1:{
         type: String,
         
     },
-    h:{
+    opinion2:{
         type: String,
         
     },
-    i:{
+    opinion3:{
         type: String,
         
     },
-    j:{
+    pros1:{
         type: String,
         
     },
-    preference:{
+    pros2:{
+        type: String,
+        
+    },
+    pros3:{
+        type: String,
+        
+    },
+    cons1:{
+        type: String,
+        
+    },
+    cons2:{
+        type: String,
+        
+    },
+    cons3:{
+        type: String,
+        
+    },
+    previousProduct_c1:{
+        type: String,
+        
+    },
+    previousProduct_c2:{
+        type: String,
+        
+    },
+    previousProduct_c3:{
+        type: String, 
+    },
+
+    purchaseInformation1:{
+        type: String, 
+    },
+
+    purchaseInformation2:{
+        type: String, 
+    },
+
+    purchaseInformation3:{
+        type: String, 
+    },
+
+    cost1:{
+        type: String, 
+    },
+
+    cost2:{
+        type: String, 
+    },
+
+    cost3:{
+        type: String, 
+    },
+
+    comparisonSurvey1:{
+        type: String, 
+    },
+
+    comparisonSurvey2:{
+        type: String, 
+    },
+
+    comparisonSurvey3:{
+        type: String, 
+    },
+
+    ingredientAwarness1:{
+        type: String, 
+    },
+
+
+    ingredientAwarness2:{
+        type: String, 
+    },
+
+
+    ingredientAwarness3:{
+        type: String, 
+    },
+
+    willingnesstoPay1:{
+        type: String, 
+    },
+
+    willingnesstoPay2:{
+        type: String, 
+    },
+
+    willingnesstoPay3:{
+        type: String, 
+    },
+
+    howManyTimes1:{
+        type: String, 
+    },
+
+    howManyTimes2:{
+        type: String, 
+    },
+
+    howManyTimes3:{
+        type: String, 
+    },
+
+    usageInformation1:{
+        type: String,        
+    },
+
+    personalCareRoutineA:{
+        type: String,        
+    },
+
+    personalCareRoutineB:{
         type: String,
     },
-    routine_a:{
+
+    personalCareRoutineC:{
         type: String,
     },
-    routine_b:{
-        type: String,
-    },
-    routine_c:{
-        type: String,
-    },
+
     allergies:{
-        type: String,
-    },
-    additional:{
         type: String,
     },
     extraFeedback:{
         type: String,
-    },
-    name:{
-        type: String,
-    },
-    contact:{
-        type: String,
-    },
-    email:{
-        type: String,
-    },
-    read:{
-        type: String,
-        default:"no"
-    },
-    
+    },    
 
 },{timestamps: true})
 
