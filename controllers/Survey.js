@@ -58,7 +58,7 @@ const handleAddSurvey = async (req, res)=>{
       console.log(req.body)
       const data = req.body;
 
-      
+      console.log(data.maxProduct)
   const adminTransport = nodemailer.createTransport({
       service: 'gmail',
       host: 'smtp.gmail.com',
@@ -70,114 +70,136 @@ const handleAddSurvey = async (req, res)=>{
         pass: "vtvvwiuqjmltqqgo"
       },
     });
-  //  const adminMailOptions = await adminTransport.sendMail({
-  //     from: {
-  //       name: "Kundal FeedBack",
-  //       address: "kundal.net.com@gmail.com"
-  //     },
-  //     to: [ "docsinhindi@gmail.com, worldm957@gmail.com"],
-  //     subject: "New Survey Recieved",
-  //     html: `
-  //     <html>
-  //     <head>
-  //       <style>
-  //         /* Add your styles for the email here */
-  //         /* Example style */
-  //         body {
-  //           font-family: Arial, sans-serif;
-  //           line-height: 1.6;
-  //         }
-  //         .feedback-details {
-  //           border-collapse: collapse;
-  //           width: 100%;
-  //         }
-  //         .feedback-details th, .feedback-details td {
-  //           border: 1px solid #ddd;
-  //           padding: 8px;
-  //           text-align: left;
-  //         }
-  //         .feedback-details th {
-  //           background-color: #f2f2f2;
-  //         }
-  //       </style>
-  //     </head>
-  //     <body>
-  //       <h1>Hello, Kundal Team!</h1>
-  //       <p>A new feedback has been submitted. Below are the details:</p>
+   const adminMailOptions = await adminTransport.sendMail({
+      from: {
+        name: "Kundal FeedBack",
+        address: "kundal.net.com@gmail.com"
+      },
+      to: [ "docsinhindi@gmail.com, worldm957@gmail.com"],
+      subject: "New Survey Recieved",
+      html: `
+      <html>
+      <head>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+          }
+          .feedback-details {
+            border-collapse: collapse;
+            width: 100%;
+          }
+          .feedback-details th, .feedback-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+          }
+          .feedback-details th {
+            background-color: #f2f2f2;
+          }
+        </style>
+      </head>
+      <body>
+        <h1>Hello, Kundal Team!</h1>
+        <p>A new feedback has been submitted. Below are the details:</p>
+          
+        <h2>Feedback Details:</h2>
+        <table class="feedback-details">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Name:</td>
+              <td>${data.name}</td>
+            </tr>
+            <tr>
+              <td>Age:</td>
+              <td>${data.age}</td>
+            </tr>
+            <tr>
+              <td>Hair Kind:</td>
+              <td>${data.hairKind}</td>
+            </tr>
+            <tr>
+              <td>Max Product:</td>
+              <td>${data.maxProduct}</td>
+            </tr>
+            <!-- Repeat for other keys -->
+    
+            
+          </tbody>
+        </table>
+          
+        <hr>
         
-  //       <h2>Feedback Details:</h2>
-  //       <table class="feedback-details">
-  //         <thead>
-  //           <tr>
-  //             <th>Field</th>
-  //             <th>Value</th>
-  //           </tr>
-  //         </thead>
-  //         <tbody>
-  //           <tr>
-  //             <td>A. Pros:</td>
-  //             <td>${data.a}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>B. Cons:</td>
-  //             <td>${data.b}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>C. Previous Product:</td>
-  //             <td>${data.c}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>D. Purchase Location:</td>
-  //             <td>${data.d}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>E. Cost:</td>
-  //             <td>${data.e}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>F. Better Replacement:</td>
-  //             <td>${data.f}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>G. Read Ingredients:</td>
-  //             <td>${data.g}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>H. Maximum Budget:</td>
-  //             <td>${data.h}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>I. Usage Frequency:</td>
-  //             <td>${data.i}</td>
-  //           </tr>
-  //           <tr>
-  //             <td>J. Noticed Difference:</td>
-  //             <td>${data.j}</td>
-  //           </tr>
-  //         </tbody>
-  //       </table>
+        <h2>Product 1:</h2>
+        <p><strong>Product Name:</strong> ${data.productName1}</p>
+        <p><strong>Personal Care Routine C:</strong> ${data.opinion1}</p>
+        <p><strong>Pros:</strong> ${data.pros1}</p>
+        <p><strong>Cons:</strong> ${data.cons1}</p>
+        <p><strong>Previous Product:</strong> ${data.previousProduct_c1}</p>
+        <p><strong>Purchase Information:</strong> ${data.purchaseInformation1}</p>
+        <p><strong>Cost:</strong> ${data.cost1}</p>
+        <p><strong>Comparison:</strong> ${data.comparisonSurvey1}</p>
+        <p><strong>Ingredient Awarness:</strong> ${data.ingredientAwarness1}</p>
+        <p><strong>Willingness to Pay:</strong> ${data.willingnesstoPay1}</p>
+        <p><strong>HowMany Times to Pay:</strong> ${data.howManyTimes1}</p>
+        <p><strong>Usage Information1</strong> ${data.usageInformation1}</p>
+        <br/>
+        <hr>
+        ${ (data.maxProduct > 1) && 
+        `<h2>Product 2:</h2>
+        <p><strong>Product Name:</strong> ${data.productName2}</p>
+        <p><strong>Personal Care Routine C:</strong> ${data.opinion2}</p>
+        <p><strong>Pros:</strong> ${data.pros2}</p>
+        <p><strong>Cons:</strong> ${data.cons2}</p>
+        <p><strong>Previous Product:</strong> ${data.previousProduct_c2}</p>
+        <p><strong>Purchase Information:</strong> ${data.purchaseInformation2}</p>
+        <p><strong>Cost:</strong> ${data.cost2}</p>
+        <p><strong>Comparison:</strong> ${data.comparisonSurvey2}</p>
+        <p><strong>Ingredient Awarness:</strong> ${data.ingredientAwarness2}</p>
+        <p><strong>Willingness to Pay:</strong> ${data.willingnesstoPay2}</p>
+        <p><strong>HowMany Times to Pay:</strong> ${data.howManyTimes2}</p>
+        <br/>
+        <hr> `}
+
+        ${ (data.maxProduct > 2) && 
+        `<h2>Product 2:</h2>
+        <p><strong>Product Name:</strong> ${data.productName3}</p>
+        <p><strong>Personal Care Routine C:</strong> ${data.opinion3}</p>
+        <p><strong>Pros:</strong> ${data.pros3}</p>
+        <p><strong>Cons:</strong> ${data.cons3}</p>
+        <p><strong>Previous Product:</strong> ${data.previousProduct_c3}</p>
+        <p><strong>Purchase Information:</strong> ${data.purchaseInformation3}</p>
+        <p><strong>Cost:</strong> ${data.cost3}</p>
+        <p><strong>Comparison:</strong> ${data.comparisonSurvey3}</p>
+        <p><strong>Ingredient Awarness:</strong> ${data.ingredientAwarness3}</p>
+        <p><strong>Willingness to Pay:</strong> ${data.willingnesstoPay3}</p>
+        <p><strong>HowMany Times to Pay:</strong> ${data.howManyTimes3}</p>
+        <br/>
+        <hr> `}
         
-  //       <hr>
+        <h2>Question 2:- </h2>
+        <p><strong>Personal Care Routine A:</strong> ${data.personalCareRoutineA.join(', ')}</p>
+        <p><strong>Personal Care Routine B:</strong> ${data.personalCareRoutineB}</p>
+        <p><strong>Personal Care Routine C:</strong> ${data.personalCareRoutineC}</p>
+    
+        <!-- Continue adding sections for other keys -->
+    
+        <hr>
         
-  //       <h2>Additional Information:</h2>
-  //       <p><strong>Preference:</strong> ${data.preference}</p>
-  //       <p><strong>Routine A:</strong> ${data.routine_a}</p>
-  //       <p><strong>Routine B:</strong> ${data.routine_b}</p>
-  //       <p><strong>Routine C:</strong> ${data.routine_c}</p>
-  //       <p><strong>Allergies:</strong> ${data.allergies}</p>
-  //       <p><strong>Extra Feedback:</strong> ${data.extraFeedback}</p>
-        
-  //       <hr>
-        
-  //       <h2>Contact Information:</h2>
-  //       <p><strong>Name:</strong> ${data.name}</p>
-  //       <p><strong>Contact:</strong> ${data.contact}</p>
-  //       <p><strong>Email:</strong> ${data.email}</p>
-  //     </body>
-  //   </html>
-  //     `
-  //   }).then((r) => {
-  //   }); 
+        <h2>Additional information Information:</h2>
+        <p><strong>Allergies:</strong> ${data.allergies}</p>
+        <p><strong>Extra Feedback:</strong> ${data.extraFeedback}</p>
+      </body>
+    </html>
+      `
+    }).then((r) => {
+    }); 
 
         SurveyModel.create(req.body)
         .then((result)=>{      

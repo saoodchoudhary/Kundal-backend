@@ -165,7 +165,8 @@ const SurveySchema = new mongoose.Schema({
     },
 
     personalCareRoutineA:{
-        type: String,        
+        type: Array,
+        default:[]        
     },
 
     personalCareRoutineB:{
