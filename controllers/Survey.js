@@ -48,9 +48,20 @@ const handleGetSpecificSurvey =async (req, res)=>{
     console.log(error)
     res.json("data not find")
     
-  }
-     
+  }    
        
+}
+const handleDeleteSurvey =async (req, res)=>{
+  const {id }= req.params;
+ SurveyModel.findByIdAndDelete({_id:id})
+ .then(()=>{
+  res.json({"msg":"success"})
+ })
+ .catch((error)=>{
+  console.log(error)
+ })
+     
+     
        
 }
 
@@ -220,5 +231,6 @@ module.exports = {
       handleGetAllCategoryForSurvey,
       handleAddSurvey,
       handleGetAllSurvey,
-      handleGetSpecificSurvey
+      handleGetSpecificSurvey,
+      handleDeleteSurvey
 }
