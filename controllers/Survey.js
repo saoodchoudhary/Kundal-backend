@@ -84,8 +84,7 @@ const handleAddSurvey = async (req, res) => {
       name: "Kundal FeedBack",
       address: "kundal.net.com@gmail.com"
     },
-    // to: [  "mohammad@aalzayed.com", "saloom99@windowslive.com"],
-    to: ["mohammad@aalzayed.com", "docsinhindi@gmail.com"],
+    to: [  "mohammad@aalzayed.com", "saloom99@windowslive.com"],
     subject: "New Survey Recieved",
     html: `
   <html>
