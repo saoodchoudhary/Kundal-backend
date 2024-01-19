@@ -14,9 +14,18 @@ const SurveySchema = new mongoose.Schema({
     name:{
         type:String
     },
+    email:{
+        type:String
+    },
+    phone:{
+        type:String
+    },
     age:{
         type: String,
         
+    },
+    q2:{
+        type:String,
     },
     hairKind:{
         type: String,
@@ -35,18 +44,6 @@ const SurveySchema = new mongoose.Schema({
         
     },
     productName3:{
-        type: String,
-        
-    },
-    opinion1:{
-        type: String,
-        
-    },
-    opinion2:{
-        type: String,
-        
-    },
-    opinion3:{
         type: String,
         
     },
@@ -165,8 +162,7 @@ const SurveySchema = new mongoose.Schema({
     },
 
     personalCareRoutineA:{
-        type: Array,
-        default:[]        
+        type: String,       
     },
 
     personalCareRoutineB:{
