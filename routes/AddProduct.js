@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose')
-const { handleAddProduct, handleGetAllProduct, handleGetCategoryProduct, handleGetDeleteProduct, handleOneProduct, updateProduct, hideShowProduct, handleGetAllAdminProduct } = require("../controllers/AddProduct");
+const { handleAddProduct, handleGetAllProduct, handleGetCategoryProduct, handleGetDeleteProduct, handleOneProduct, updateProduct, hideShowProduct, handleGetAllAdminProduct, handleGetAllCategoryProduct } = require("../controllers/AddProduct");
 
 const router = express.Router();
 
@@ -34,6 +34,7 @@ router.get("/product/admin", handleGetAllAdminProduct)
 router.get("/product/:id", handleOneProduct)
 
 router.get("/product/category/:id" , handleGetCategoryProduct)
+router.get("/product/allCategory/:id" , handleGetAllCategoryProduct)
 
 router.delete("/product/delete/:id" , handleGetDeleteProduct)
 

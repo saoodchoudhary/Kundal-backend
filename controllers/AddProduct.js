@@ -118,6 +118,19 @@ const handleGetCategoryProduct = (req, res) => {
          });
       })
 }
+const handleGetAllCategoryProduct = (req, res) => {
+   AddProductModel.find({category: req.params.id })
+      .then((result) => {
+
+         res.json(result);
+      })
+      .catch(() => {
+         res.json({
+            success: false,
+            error: 'Failed to fetch category Product'
+         });
+      })
+}
 const handleOneProduct = (req, res) => {
    AddProductModel.find({ _id: req.params.id })
       .then((result) => {
@@ -177,5 +190,6 @@ module.exports = {
    handleOneProduct,
    updateProduct,
    hideShowProduct,
-   handleGetAllAdminProduct
+   handleGetAllAdminProduct,
+   handleGetAllCategoryProduct
 }
