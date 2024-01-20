@@ -166,6 +166,11 @@ const handleAddSurvey = async (req, res) => {
       
     <hr>
     
+    <h2>Q1 Product Preference :- </h2>
+    <p><strong>What is your personal care routine:</strong> ${data.q2}</p>
+  
+    <hr>
+    
     <h2>Product 1:</h2>
     <p><strong>Product Name:</strong> ${data.productName1}</p>
     <p><strong>Pros:</strong> ${data.pros1}</p>
@@ -210,10 +215,6 @@ const handleAddSurvey = async (req, res) => {
     <br/>
     <hr> `}
     
-    <h2>Q2 Product Preference :- </h2>
-    <p><strong>What is your personal care routine:</strong> ${data.q2}</p>
-  
-    <hr>
 
     <h2>Q3 Personal Care Routine:- </h2>
     <p><strong>What is your personal care routine:</strong> ${data.personalCareRoutineA}</p>
