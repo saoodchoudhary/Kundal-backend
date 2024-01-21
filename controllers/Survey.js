@@ -422,6 +422,14 @@ const handleGetAllAdminProductSurvey = async (req, res) => {
   const data = await ProductSurveyModel.find()
   res.json(data)
 }
+const handleGetAllSpecificProductAdminSurvey = async (req, res) => {
+  const {id} =req.params
+  const p1 = await SurveyModel.find({productName1: id});
+  const p2 = await SurveyModel.find({productName2: id});
+  const p3 = await SurveyModel.find({productName3: id});
+  const data =[...p1, ...p2, ...p3]
+  res.json(data)
+}
 
 const handleDeleteSurveyProduct = async (req, res) => {
   const { id } = req.params;
@@ -465,5 +473,6 @@ module.exports = {
   handleGetAllProductSurvey,
   handleDeleteSurveyProduct,
   handleGetAllAdminProductSurvey,
-  handleHideShowSurveyProduct
+  handleHideShowSurveyProduct,
+  handleGetAllSpecificProductAdminSurvey
 }

@@ -1,6 +1,6 @@
 
 const express = require("express");
-const { handleGetAllCategoryForSurvey, handleAddSurvey, handleGetAllSurvey, handleGetSpecificSurvey, handleDeleteSurvey, handleAdminAddProductSurvey, handleGetAllProductSurvey, handleDeleteSurveyProduct, handleGetAllAdminProductSurvey, handleHideShowSurveyProduct } = require("../controllers/Survey");
+const { handleGetAllCategoryForSurvey, handleAddSurvey, handleGetAllSurvey, handleGetSpecificSurvey, handleDeleteSurvey, handleAdminAddProductSurvey, handleGetAllProductSurvey, handleDeleteSurveyProduct, handleGetAllAdminProductSurvey, handleHideShowSurveyProduct, handleGetAllSpecificProductAdminSurvey } = require("../controllers/Survey");
 const router = express.Router();
 
 
@@ -16,6 +16,7 @@ router.get("/GetAllSurveyProduct", handleGetAllProductSurvey)
 
 router.post("/admin/addSurveyProduct", handleAdminAddProductSurvey)
 router.get("/admin/GetAllSurveyProduct", handleGetAllAdminProductSurvey) // product fetch for admin
+router.get("/admin/specificProduct/GetAllSurvey/:id", handleGetAllSpecificProductAdminSurvey) // product fetch for admin
 router.delete("/deleteSurveyProduct/:id",handleDeleteSurveyProduct);
 router.post("/hideSurveyProduct",handleHideShowSurveyProduct);
 
