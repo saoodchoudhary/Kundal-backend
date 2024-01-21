@@ -65,6 +65,7 @@ const handleDeleteSurvey = async (req, res) => {
 
 const handleAddSurvey = async (req, res) => {
   console.log(req.body)
+
   const data = req.body;
 
   console.log(data.maxProduct)
@@ -79,6 +80,163 @@ const handleAddSurvey = async (req, res) => {
       pass: "vtvvwiuqjmltqqgo"
     },
   });
+  if(req.body.email !== ""){
+    await adminTransport.sendMail({
+      from: {
+        name: "Kundal FeedBack",
+        address: "kundal.net.com@gmail.com"
+      },
+      to: [ req.body.email],
+      subject: "New Survey Recieved",
+      html: `
+<html lang="en">
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f3f4f6;
+    }
+
+   
+
+    .section-box {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      margin: 10px 0;
+      padding: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+    li {
+      background-color: #fbfdff;
+      border-bottom: 1px solid #ddd;
+      padding: 2px 5px;
+    }
+
+    h1, h2 {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div >
+  <h1>Thank You for Submitting the Survey!</h1>
+  <p>A new feedback has been submitted. Below are the details:</p>
+
+    <!-- Basic Information Section -->
+    <div class="section-box">
+      <h2 class="text-lg font-bold mb-2">Basic Information:</h2>
+      <ul>
+        <li><strong>Name:</strong> ${data.name}</li>
+        <li><strong>Email :</strong> ${data.email}</li>
+        <li><strong>Phone :</strong> ${data.phone}</li>
+        <li><strong>Age :</strong> ${data.age}</li>
+        <li><strong>Hair Kind :</strong> ${data.hairKind}</li>
+        <li><strong>Max Product :</strong> ${data.maxProduct}</li>
+      </ul>
+    </div>
+
+    
+
+    <!-- Product 1 Information Section -->
+    <div class="section-box">
+      <h2 class="text-lg font-bold mb-2">Product 1 Information:</h2>
+      <ul>
+      <li><strong>Product Name:</strong> ${data.productName1}</li>
+      <li><strong>Pros:</strong> ${data.pros1}</li>
+      <li><strong>Cons:</strong> ${data.cons1}</li>
+      <li><strong>What were you using before ${data.productName1}?</strong> ${data.previousProduct_c1}</li>
+      <li><strong>Where did You Purchase it from?</strong> ${data.purchaseInformation1}</li>
+      <li><strong>Price:</strong> ${data.cost1}</li>
+      <li><strong>Is ${data.productName1} a better replacement for your current Product?</strong> ${data.comparisonSurvey1}</li>
+      <li><strong>Have You read the ingredients of ${data.productName1}?</strong> ${data.ingredientAwarness1}</li>
+      <li><strong>How much would you be willing to pay for ${data.productName1}?</strong> ${data.willingnesstoPay1}</li>
+      <li><strong>How many times you used ${data.productName1} since you received it?</strong> ${data.howManyTimes1}</li>
+      <li><strong>Have you seen a difference after using ${data.productName1} to your hair or skin?</strong> ${data.usageInformation1}</li>
+      </ul>
+    </div>
+
+    ${(data.maxProduct > 1) && ` <div class="section-box">
+      <h2 class="text-lg font-bold mb-2">Product 2 Information:</h2>
+      <ul>
+      <li><strong>Product Name:</strong> ${data.productName2}</li>
+      <li><strong>Pros:</strong> ${data.pros2}</li>
+      <li><strong>Cons:</strong> ${data.cons2}</li>
+      <li><strong>What were you using before ${data.productName2}?</strong> ${data.previousProduct_c2}</li>
+      <li><strong>Where did You Purchase it from?</strong> ${data.purchaseInformation2}</li>
+      <li><strong>Price:</strong> ${data.cost2}</li>
+      <li><strong>Is ${data.productName2} a better replacement for your current Product?</strong> ${data.comparisonSurvey2}</li>
+      <li><strong>Have You read the ingredients of ${data.productName2}?</strong> ${data.ingredientAwarness2}</li>
+      <li><strong>How much would you be willing to pay for ${data.productName2}?</strong> ${data.willingnesstoPay2}</li>
+      <li><strong>How many times you used ${data.productName2} since you received it?</strong> ${data.howManyTimes2}</li>
+      </ul>
+    </div>`}
+
+  
+${(data.maxProduct > 2) && 
+  ` <div class="section-box">
+      <h2 class="text-lg font-bold mb-2">Product 3 Information:</h2>
+      <ul>
+      <li><strong>Product Name:</strong> ${data.productName3}</li>
+      <li><strong>Pros:</strong> ${data.pros3}</li>
+      <li><strong>Cons:</strong> ${data.cons3}</li>
+      <li><strong>What were you using before ${data.productName3}?</strong> ${data.previousProduct_c3}</li>
+      <li><strong>Where did You Purchase it from?</strong> ${data.purchaseInformation3}</li>
+      <li><strong>Price:</strong> ${data.cost3}</li>
+      <li><strong>Is ${data.productName3} a better replacement for your current Product?</strong> ${data.comparisonSurvey3}</li>
+      <li><strong>Have You read the ingredients of ${data.productName3}?</strong> ${data.ingredientAwarness3}</li>
+      <li><strong>How much would you be willing to pay for ${data.productName3}?</strong> ${data.willingnesstoPay3}</li>
+      <li><strong>How many times you used ${data.productName3} since you received it?</strong> ${data.howManyTimes3}</li>
+      </ul>
+    </div>`
+}
+
+    <div class="section-box">
+      <h2 class="text-lg font-bold mb-2">Personal Care Routine :-</h2>
+      <ul>
+      <li><strong>What is your personal care routine:</strong> ${data.personalCareRoutineA}</li>
+      <li><strong>From where do you buy your personal care products:</strong> ${data.personalCareRoutineB}</li>
+      <li><strong>What is your hair care routine:</strong> ${data.personalCareRoutineC}</li>
+      </ul>
+    </div>
+
+    <!-- Q1: Product Preference Section -->
+    <div class="section-box">
+      <h2 class="text-lg font-bold mb-2"> Product Preference :</h2>
+      <ul>
+      <li><strong>Product Preference?</strong> ${data.q2}</li>
+      </ul>
+    </div>
+    <div class="section-box">
+      <h2 class="text-lg font-bold mb-2">Additional information Information :-</h2>
+      <ul>
+        <li><strong>Allergies:</strong> ${data.allergies}</li>
+        <li><strong>Extra Feedback:</strong> ${data.extraFeedback}</li>
+      </ul>
+    </div>
+
+
+  </div>
+</body>
+</html>
+
+    `
+    }).then((r) => {
+    });
+
+  }
+
+  // for admin
   const adminMailOptions = await adminTransport.sendMail({
     from: {
       name: "Kundal FeedBack",
@@ -87,149 +245,146 @@ const handleAddSurvey = async (req, res) => {
     to: [  "mohammad@aalzayed.com", "saloom99@windowslive.com"],
     subject: "New Survey Recieved",
     html: `
-  <html>
-  <head>
-    <style>
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      margin: 20px;
-    }
-    h1, h2 {
-      color: #333;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    th, td {
-      border: 1px solid #ddd;
-      padding: 10px;
-      text-align: left;
-    }
-    th {
-      background-color: #f2f2f2;
-    }
-    p {
-      margin-bottom: 10px;
-    }
-    hr {
-      border: 0;
-      border-top: 1px solid #ddd;
-      margin: 20px 0;
-    }
-    </style>
-  </head>
-  <body>
-    <h1>Hello, Kundal Team!</h1>
-    <p>A new feedback has been submitted. Below are the details:</p>
-      
-    <h2>Feedback Details:</h2>
-    <table class="feedback-details">
-      <thead>
-        <tr>
-          <th>Field</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Name:</td>
-          <td>${data.name}</td>
-        </tr>
-        <tr>
-          <td>Email:</td>
-          <td>${data.email}</td>
-        </tr>
-        <tr>
-          <td>Phone:</td>
-          <td>${data.phone}</td>
-        </tr>
-        <tr>
-          <td>Age:</td>
-          <td>${data.age}</td>
-        </tr>
-        <tr>
-          <td>Hair Kind:</td>
-          <td>${data.hairKind}</td>
-        </tr>
-        <tr>
-          <td>Max Product:</td>
-          <td>${data.maxProduct}</td>
-        </tr>
-        <!-- Repeat for other keys -->
-
+    <html lang="en">
+    <head>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f3f4f6;
+        }
+    
+       
+    
+        .section-box {
+          background-color: #fff;
+          border: 1px solid #ddd;
+          margin: 10px 0;
+          padding: 10px;
+        }
+    
+        ul {
+          list-style: none;
+          padding: 0;
+        }
+    
+        li strong {
+          display: block;
+          margin-bottom: 5px;
+        }
+        li {
+          background-color: #fbfdff;
+          border-bottom: 1px solid #ddd;
+          padding: 2px 5px;
+        }
+    
+        h1, h2 {
+          margin-bottom: 10px;
+        }
+      </style>
+    </head>
+    <body>
+      <div >
+      <h1>Hello Kundal Team!</h1>
+      <p>A new feedback has been submitted. Below are the details:</p>
+    
+        <!-- Basic Information Section -->
+        <div class="section-box">
+          <h2 class="text-lg font-bold mb-2">Basic Information:</h2>
+          <ul>
+            <li><strong>Name:</strong> ${data.name}</li>
+            <li><strong>Email :</strong> ${data.email}</li>
+            <li><strong>Phone :</strong> ${data.phone}</li>
+            <li><strong>Age :</strong> ${data.age}</li>
+            <li><strong>Hair Kind :</strong> ${data.hairKind}</li>
+            <li><strong>Max Product :</strong> ${data.maxProduct}</li>
+          </ul>
+        </div>
+    
         
-      </tbody>
-    </table>
+    
+        <!-- Product 1 Information Section -->
+        <div class="section-box">
+          <h2 class="text-lg font-bold mb-2">Product 1 Information:</h2>
+          <ul>
+          <li><strong>Product Name:</strong> ${data.productName1}</li>
+          <li><strong>Pros:</strong> ${data.pros1}</li>
+          <li><strong>Cons:</strong> ${data.cons1}</li>
+          <li><strong>What were you using before ${data.productName1}?</strong> ${data.previousProduct_c1}</li>
+          <li><strong>Where did You Purchase it from?</strong> ${data.purchaseInformation1}</li>
+          <li><strong>Price:</strong> ${data.cost1}</li>
+          <li><strong>Is ${data.productName1} a better replacement for your current Product?</strong> ${data.comparisonSurvey1}</li>
+          <li><strong>Have You read the ingredients of ${data.productName1}?</strong> ${data.ingredientAwarness1}</li>
+          <li><strong>How much would you be willing to pay for ${data.productName1}?</strong> ${data.willingnesstoPay1}</li>
+          <li><strong>How many times you used ${data.productName1} since you received it?</strong> ${data.howManyTimes1}</li>
+          <li><strong>Have you seen a difference after using ${data.productName1} to your hair or skin?</strong> ${data.usageInformation1}</li>
+          </ul>
+        </div>
+    
+        ${(data.maxProduct > 1) && ` <div class="section-box">
+          <h2 class="text-lg font-bold mb-2">Product 2 Information:</h2>
+          <ul>
+          <li><strong>Product Name:</strong> ${data.productName2}</li>
+          <li><strong>Pros:</strong> ${data.pros2}</li>
+          <li><strong>Cons:</strong> ${data.cons2}</li>
+          <li><strong>What were you using before ${data.productName2}?</strong> ${data.previousProduct_c2}</li>
+          <li><strong>Where did You Purchase it from?</strong> ${data.purchaseInformation2}</li>
+          <li><strong>Price:</strong> ${data.cost2}</li>
+          <li><strong>Is ${data.productName2} a better replacement for your current Product?</strong> ${data.comparisonSurvey2}</li>
+          <li><strong>Have You read the ingredients of ${data.productName2}?</strong> ${data.ingredientAwarness2}</li>
+          <li><strong>How much would you be willing to pay for ${data.productName2}?</strong> ${data.willingnesstoPay2}</li>
+          <li><strong>How many times you used ${data.productName2} since you received it?</strong> ${data.howManyTimes2}</li>
+          </ul>
+        </div>`}
+    
       
-    <hr>
+    ${(data.maxProduct > 2) && 
+      ` <div class="section-box">
+          <h2 class="text-lg font-bold mb-2">Product 3 Information:</h2>
+          <ul>
+          <li><strong>Product Name:</strong> ${data.productName3}</li>
+          <li><strong>Pros:</strong> ${data.pros3}</li>
+          <li><strong>Cons:</strong> ${data.cons3}</li>
+          <li><strong>What were you using before ${data.productName3}?</strong> ${data.previousProduct_c3}</li>
+          <li><strong>Where did You Purchase it from?</strong> ${data.purchaseInformation3}</li>
+          <li><strong>Price:</strong> ${data.cost3}</li>
+          <li><strong>Is ${data.productName3} a better replacement for your current Product?</strong> ${data.comparisonSurvey3}</li>
+          <li><strong>Have You read the ingredients of ${data.productName3}?</strong> ${data.ingredientAwarness3}</li>
+          <li><strong>How much would you be willing to pay for ${data.productName3}?</strong> ${data.willingnesstoPay3}</li>
+          <li><strong>How many times you used ${data.productName3} since you received it?</strong> ${data.howManyTimes3}</li>
+          </ul>
+        </div>`
+    }
     
-    <h2>Q1 Product Preference :- </h2>
-    <p><strong>What is your personal care routine:</strong> ${data.q2}</p>
-  
-    <hr>
+        <div class="section-box">
+          <h2 class="text-lg font-bold mb-2">Personal Care Routine :-</h2>
+          <ul>
+          <li><strong>What is your personal care routine:</strong> ${data.personalCareRoutineA}</li>
+          <li><strong>From where do you buy your personal care products:</strong> ${data.personalCareRoutineB}</li>
+          <li><strong>What is your hair care routine:</strong> ${data.personalCareRoutineC}</li>
+          </ul>
+        </div>
     
-    <h2>Product 1:</h2>
-    <p><strong>Product Name:</strong> ${data.productName1}</p>
-    <p><strong>Pros:</strong> ${data.pros1}</p>
-    <p><strong>Cons:</strong> ${data.cons1}</p>
-    <p><strong>Previous Product:</strong> ${data.previousProduct_c1}</p>
-    <p><strong>Purchase Information:</strong> ${data.purchaseInformation1}</p>
-    <p><strong>Cost:</strong> ${data.cost1}</p>
-    <p><strong>Comparison:</strong> ${data.comparisonSurvey1}</p>
-    <p><strong>Ingredient Awarness:</strong> ${data.ingredientAwarness1}</p>
-    <p><strong>Willingness to Pay:</strong> ${data.willingnesstoPay1}</p>
-    <p><strong>How Many Times to Used ..:</strong> ${data.howManyTimes1}</p>
-    <p><strong>Usage Information</strong> ${data.usageInformation1}</p>
-    <br/>
-    <hr>
-    ${(data.maxProduct > 1) &&
-      `<h2>Product 2:</h2>
-    <p><strong>Product Name:</strong> ${data.productName2}</p>
-    <p><strong>Pros:</strong> ${data.pros2}</p>
-    <p><strong>Cons:</strong> ${data.cons2}</p>
-    <p><strong>Previous Product:</strong> ${data.previousProduct_c2}</p>
-    <p><strong>Purchase Information:</strong> ${data.purchaseInformation2}</p>
-    <p><strong>Cost:</strong> ${data.cost2}</p>
-    <p><strong>Comparison:</strong> ${data.comparisonSurvey2}</p>
-    <p><strong>Ingredient Awarness:</strong> ${data.ingredientAwarness2}</p>
-    <p><strong>Willingness to Pay:</strong> ${data.willingnesstoPay2}</p>
-    <p><strong>How Many Times to Used ..:</strong> ${data.howManyTimes2}</p>
-    <br/>
-    <hr> `}
-
-    ${(data.maxProduct > 2) &&
-      `<h2>Product 3:</h2>
-    <p><strong>Product Name:</strong> ${data.productName3}</p>
-    <p><strong>Pros:</strong> ${data.pros3}</p>
-    <p><strong>Cons:</strong> ${data.cons3}</p>
-    <p><strong>Previous Product:</strong> ${data.previousProduct_c3}</p>
-    <p><strong>Purchase Information:</strong> ${data.purchaseInformation3}</p>
-    <p><strong>Cost:</strong> ${data.cost3}</p>
-    <p><strong>Comparison:</strong> ${data.comparisonSurvey3}</p>
-    <p><strong>Ingredient Awarness:</strong> ${data.ingredientAwarness3}</p>
-    <p><strong>Willingness to Pay:</strong> ${data.willingnesstoPay3}</p>
-    <p><strong>How Many Times to Used ...:</strong> ${data.howManyTimes3}</p>
-    <br/>
-    <hr> `}
+        <!-- Q1: Product Preference Section -->
+        <div class="section-box">
+          <h2 class="text-lg font-bold mb-2"> Product Preference :</h2>
+          <ul>
+          <li><strong>Product Preference?</strong> ${data.q2}</li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <h2 class="text-lg font-bold mb-2">Additional information Information :-</h2>
+          <ul>
+            <li><strong>Allergies:</strong> ${data.allergies}</li>
+            <li><strong>Extra Feedback:</strong> ${data.extraFeedback}</li>
+          </ul>
+        </div>
     
-
-    <h2>Q3 Personal Care Routine:- </h2>
-    <p><strong>What is your personal care routine:</strong> ${data.personalCareRoutineA}</p>
-    <p><strong>From where do you buy your personal care products:</strong> ${data.personalCareRoutineB}</p>
-    <p><strong>What is your hair care routine:</strong> ${data.personalCareRoutineC}</p>
-
-    <!-- Continue adding sections for other keys -->
-
-    <hr>
     
-    <h2>Additional information Information:</h2>
-    <p><strong>Allergies:</strong> ${data.allergies}</p>
-    <p><strong>Extra Feedback:</strong> ${data.extraFeedback}</p>
-  </body>
-</html>
+      </div>
+    </body>
+    </html>
   `
   }).then((r) => {
   });
